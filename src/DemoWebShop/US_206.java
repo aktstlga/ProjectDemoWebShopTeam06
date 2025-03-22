@@ -14,10 +14,10 @@ import java.time.Duration;
 
 public class US_206 extends BaseDriver {
     @Test
-    public void logInToAccount(){
+    public void logInToAccount() {
         driver.get("https://demowebshop.tricentis.com");
 
-        Actions actionDriver=new Actions(driver);
+        Actions actionDriver = new Actions(driver);
         WebDriverWait waitDuration = new WebDriverWait(driver, Duration.ofSeconds(120));
 
         WebElement logIn = driver.findElement(By.className("ico-login"));
@@ -31,29 +31,33 @@ public class US_206 extends BaseDriver {
         waitDuration.until(ExpectedConditions.elementToBeClickable(emailPlaceholder));
         actionDriver.moveToElement(emailPlaceholder).click().sendKeys("team006test@gmail.com").build().perform();
 
-        WebElement passwordPlaceholder=driver.findElement(By.id("Password"));
+        WebElement passwordPlaceholder = driver.findElement(By.id("Password"));
         waitDuration.until(ExpectedConditions.visibilityOf(passwordPlaceholder));
         waitDuration.until(ExpectedConditions.elementToBeClickable(passwordPlaceholder));
         actionDriver.moveToElement(passwordPlaceholder).click().sendKeys("Password123").build().perform();
 
-        WebElement submitButton=driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
+        WebElement submitButton = driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
         waitDuration.until(ExpectedConditions.visibilityOf(submitButton));
         waitDuration.until(ExpectedConditions.elementToBeClickable(submitButton));
         actionDriver.moveToElement(submitButton).click().build().perform();
 
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
-        Assert.assertTrue("Anasayfaya yönlendirildi.",driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
+        Assert.assertTrue("Anasayfaya yönlendirildi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
 
         WebElement loggedAccount = driver.findElement(By.cssSelector("a[href='/customer/info'][class='account']"));
         waitDuration.until(ExpectedConditions.visibilityOf(loggedAccount));
-        Assert.assertTrue("Doğru hesaba giriş yapıldı",loggedAccount.getText().contains("team006test@gmail.com"));
+        Assert.assertTrue("Doğru hesaba giriş yapıldı", loggedAccount.getText().contains("team006test@gmail.com"));
 
-        WebElement featuredProduct=driver.findElement(By.cssSelector("div[class='product-item'][data-productid='31']"));
+        WebElement featuredProduct = driver.findElement(By.cssSelector("div[class='product-item'][data-productid='31']"));
         actionDriver.moveToElement(featuredProduct).build().perform();
         waitDuration.until(ExpectedConditions.visibilityOf(featuredProduct));
 
-        WebElement featuredProductButton=driver.findElement(By.cssSelector("div[class='product-item'][data-productid='31']> *:nth-child(2)> *:nth-child(4)> *:nth-child(2)> *:nth-child(1)"));
+        WebElement featuredProductButton = driver.findElement(By.cssSelector("div[class='product-item'][data-productid='31']> *:nth-child(2)> *:nth-child(4)> *:nth-child(2)> *:nth-child(1)"));
         waitDuration.until(ExpectedConditions.elementToBeClickable(featuredProductButton));
         actionDriver.moveToElement(featuredProductButton).click().build().perform();
+
+        WebElement addedNotification = driver.findElement(By.id("bar-notification"));
+        waitDuration.until(ExpectedConditions.visibilityOf(addedNotification));
+        Assert.assertTrue("Başarılı şekilde sepete eklendi.", addedNotification.getText().contains("The product has been added to your shopping cart"));
     }
 }
