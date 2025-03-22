@@ -19,7 +19,10 @@ public class US_206 extends BaseDriver {
         Actions actionDriver=new Actions(driver);
         WebDriverWait waitDuration = new WebDriverWait(driver, Duration.ofSeconds(120));
 
-
+        WebElement logIn = driver.findElement(By.className("ico-login"));
+        waitDuration.until(ExpectedConditions.visibilityOf(logIn));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(logIn));
+        actionDriver.moveToElement(logIn).click().build().perform();
 
     }
 }
