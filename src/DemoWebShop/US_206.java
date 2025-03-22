@@ -34,5 +34,10 @@ public class US_206 extends BaseDriver {
         waitDuration.until(ExpectedConditions.visibilityOf(passwordPlaceholder));
         waitDuration.until(ExpectedConditions.elementToBeClickable(passwordPlaceholder));
         actionDriver.moveToElement(passwordPlaceholder).click().sendKeys("Password123").build().perform();
+
+        WebElement submitButton=driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
+        waitDuration.until(ExpectedConditions.visibilityOf(submitButton));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(submitButton));
+        actionDriver.moveToElement(submitButton).click().build().perform();
     }
 }
