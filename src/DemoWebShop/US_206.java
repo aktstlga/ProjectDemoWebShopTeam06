@@ -49,8 +49,8 @@ public class US_206 extends BaseDriver {
         Assert.assertTrue("Doğru hesaba giriş yapıldı", loggedAccount.getText().contains("team006test@gmail.com"));
 
         WebElement featuredProduct = driver.findElement(By.cssSelector("div[class='product-item'][data-productid='31']"));
-        actionDriver.moveToElement(featuredProduct).build().perform();
         waitDuration.until(ExpectedConditions.visibilityOf(featuredProduct));
+        actionDriver.moveToElement(featuredProduct).build().perform();
 
         WebElement featuredProductButton = driver.findElement(By.cssSelector("div[class='product-item'][data-productid='31']> *:nth-child(2)> *:nth-child(4)> *:nth-child(2)> *:nth-child(1)"));
         waitDuration.until(ExpectedConditions.elementToBeClickable(featuredProductButton));
@@ -59,5 +59,22 @@ public class US_206 extends BaseDriver {
         WebElement addedNotification = driver.findElement(By.id("bar-notification"));
         waitDuration.until(ExpectedConditions.visibilityOf(addedNotification));
         Assert.assertTrue("Başarılı şekilde sepete eklendi.", addedNotification.getText().contains("The product has been added to your shopping cart"));
+
+        WebElement closeNotification = driver.findElement(By.cssSelector("span[class='close'][title='Close']"));
+        waitDuration.until(ExpectedConditions.visibilityOf(closeNotification));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(closeNotification));
+        actionDriver.moveToElement(closeNotification).click().build().perform();
+
+        WebElement shoppingCartButton = driver.findElement(By.cssSelector("a[href='/cart'][class='ico-cart']"));
+        waitDuration.until(ExpectedConditions.visibilityOf(shoppingCartButton));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(shoppingCartButton));
+        actionDriver.moveToElement(shoppingCartButton).click().build().perform();
+
+        WebElement goToCartButton = driver.findElement(By.cssSelector("input[type='button'][value='Go to cart']"));
+        waitDuration.until(ExpectedConditions.visibilityOf(goToCartButton));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(goToCartButton));
+        actionDriver.moveToElement(goToCartButton).click().build().perform();
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+        Assert.assertTrue("Shopping Cart kısmına giremedi.",driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/cart"));
     }
 }
