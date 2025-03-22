@@ -1,6 +1,7 @@
 package DemoWebShop;
 
 import Utility.BaseDriver;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -39,5 +40,12 @@ public class US_206 extends BaseDriver {
         waitDuration.until(ExpectedConditions.visibilityOf(submitButton));
         waitDuration.until(ExpectedConditions.elementToBeClickable(submitButton));
         actionDriver.moveToElement(submitButton).click().build().perform();
+
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+        Assert.assertTrue("Anasayfaya yönlendirildi.",driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
+
+        WebElement loggedAccount = driver.findElement(By.cssSelector("a[href='/customer/info'][class='account']"));
+        waitDuration.until(ExpectedConditions.visibilityOf(loggedAccount));
+        Assert.assertTrue("Doğru hesaba giriş yapıldı",loggedAccount.getText().contains("team006test@gmail.com"));
     }
 }
