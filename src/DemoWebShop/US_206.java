@@ -24,5 +24,10 @@ public class US_206 extends BaseDriver {
         waitDuration.until(ExpectedConditions.elementToBeClickable(logIn));
         actionDriver.moveToElement(logIn).click().build().perform();
 
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+        WebElement emailPlaceholder = driver.findElement(By.id("Email"));
+        waitDuration.until(ExpectedConditions.visibilityOf(emailPlaceholder));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(emailPlaceholder));
+        actionDriver.moveToElement(emailPlaceholder).click().sendKeys("team006test@gmail.com").build().perform();
     }
 }
