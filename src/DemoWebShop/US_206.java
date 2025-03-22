@@ -47,5 +47,13 @@ public class US_206 extends BaseDriver {
         WebElement loggedAccount = driver.findElement(By.cssSelector("a[href='/customer/info'][class='account']"));
         waitDuration.until(ExpectedConditions.visibilityOf(loggedAccount));
         Assert.assertTrue("Doğru hesaba giriş yapıldı",loggedAccount.getText().contains("team006test@gmail.com"));
+
+        WebElement featuredProduct=driver.findElement(By.cssSelector("div[class='product-item'][data-productid='31']"));
+        actionDriver.moveToElement(featuredProduct).build().perform();
+        waitDuration.until(ExpectedConditions.visibilityOf(featuredProduct));
+
+        WebElement featuredProductButton=driver.findElement(By.cssSelector("div[class='product-item'][data-productid='31']> *:nth-child(2)> *:nth-child(4)> *:nth-child(2)> *:nth-child(1)"));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(featuredProductButton));
+        actionDriver.moveToElement(featuredProductButton).click().build().perform();
     }
 }
