@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -76,5 +77,22 @@ public class US_206 extends BaseDriver {
         actionDriver.moveToElement(goToCartButton).click().build().perform();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         Assert.assertTrue("Shopping Cart kısmına giremedi.",driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/cart"));
+
+        WebElement countrySelectList = driver.findElement(By.cssSelector("select[id='CountryId'][name='CountryId']"));
+        waitDuration.until(ExpectedConditions.visibilityOf(countrySelectList));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(countrySelectList));
+        actionDriver.moveToElement(countrySelectList).click().build().perform();
+        new Select(countrySelectList).selectByIndex(1);
+
+        WebElement stateSelectList = driver.findElement(By.cssSelector("select[id='StateProvinceId'][name='StateProvinceId']"));
+        waitDuration.until(ExpectedConditions.visibilityOf(stateSelectList));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(stateSelectList));
+        actionDriver.moveToElement(stateSelectList).click().build().perform();
+        new Select(stateSelectList).selectByIndex(3);
+
+        WebElement checkBoxForTermsOfService=driver.findElement(By.id("termsofservice"));
+        waitDuration.until(ExpectedConditions.visibilityOf(checkBoxForTermsOfService));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(checkBoxForTermsOfService));
+        actionDriver.moveToElement(checkBoxForTermsOfService).click().build().perform();
     }
 }
