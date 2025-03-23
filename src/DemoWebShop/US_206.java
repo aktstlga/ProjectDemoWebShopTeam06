@@ -42,7 +42,7 @@ public class US_206 extends BaseDriver {
         waitDuration.until(ExpectedConditions.elementToBeClickable(submitButton));
         actionDriver.moveToElement(submitButton).click().build().perform();
 
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/"));
         Assert.assertTrue("Anasayfaya yönlendirildi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
 
         WebElement loggedAccount = driver.findElement(By.cssSelector("a[href='/customer/info'][class='account']"));
@@ -75,7 +75,7 @@ public class US_206 extends BaseDriver {
         waitDuration.until(ExpectedConditions.visibilityOf(goToCartButton));
         waitDuration.until(ExpectedConditions.elementToBeClickable(goToCartButton));
         actionDriver.moveToElement(goToCartButton).click().build().perform();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/cart"));
         Assert.assertTrue("Shopping Cart kısmına giremedi.",driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/cart"));
 
         WebElement countrySelectList = driver.findElement(By.cssSelector("select[id='CountryId'][name='CountryId']"));
@@ -94,5 +94,22 @@ public class US_206 extends BaseDriver {
         waitDuration.until(ExpectedConditions.visibilityOf(checkBoxForTermsOfService));
         waitDuration.until(ExpectedConditions.elementToBeClickable(checkBoxForTermsOfService));
         actionDriver.moveToElement(checkBoxForTermsOfService).click().build().perform();
+
+        WebElement checkoutBox=driver.findElement(By.cssSelector("button[type='submit'][id='checkout'][name='checkout'][value='checkout']"));
+        waitDuration.until(ExpectedConditions.visibilityOf(checkoutBox));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(checkoutBox));
+        actionDriver.moveToElement(checkoutBox).click().build().perform();
+        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/onepagecheckout"));
+        Assert.assertTrue("Checkout'a başarılı şekilde geçemedi.",driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/onepagecheckout"));
+
+        WebElement newAdressSelect=driver.findElement(By.cssSelector("select[name='billing_address_id'][id='billing-address-select']"));
+        WebElement adressAdjustmentsPlace=driver.findElement(By.className("edit-address"));
+        waitDuration.until(ExpectedConditions.visibilityOf(newAdressSelect));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(newAdressSelect));
+        actionDriver.moveToElement(newAdressSelect).click().build().perform();
+        new Select(newAdressSelect).selectByIndex(1);
+        waitDuration.until(ExpectedConditions.visibilityOf(adressAdjustmentsPlace));
+        actionDriver.moveToElement(newAdressSelect).click().build().perform();
+
     }
 }
