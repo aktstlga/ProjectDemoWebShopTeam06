@@ -1,4 +1,6 @@
 package DemoWebShop;
 
-public class US_204 {
+import Utility.BaseDriver;
+
+public class US_204 extends BaseDriver {
 }
