@@ -38,11 +38,11 @@ public class US_206 extends BaseDriver {
         waitForVisibilityAndClickThanClick(submitButton);
 
         waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/"));
-        Assert.assertTrue("Anasayfaya yönlendirildi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
+        Assert.assertTrue("Anasayfaya yönlendirilemedi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
 
         WebElement loggedAccount = driver.findElement(By.cssSelector("a[href='/customer/info'][class='account']"));
         waitDuration.until(ExpectedConditions.visibilityOf(loggedAccount));
-        Assert.assertTrue("Doğru hesaba giriş yapıldı", loggedAccount.getText().contains("team006test@gmail.com"));
+        Assert.assertTrue("Doğru hesaba giriş yapılamadı", loggedAccount.getText().contains("team006test@gmail.com"));
 
         WebElement featuredProduct = driver.findElement(By.cssSelector("div[class='product-item'][data-productid='31']"));
         waitDuration.until(ExpectedConditions.visibilityOf(featuredProduct));
@@ -54,7 +54,7 @@ public class US_206 extends BaseDriver {
 
         WebElement addedNotification = driver.findElement(By.id("bar-notification"));
         waitDuration.until(ExpectedConditions.visibilityOf(addedNotification));
-        Assert.assertTrue("Başarılı şekilde sepete eklendi.", addedNotification.getText().contains("The product has been added to your shopping cart"));
+        Assert.assertTrue("Başarılı şekilde sepete eklenemedi.", addedNotification.getText().contains("The product has been added to your shopping cart"));
 
         WebElement closeNotification = driver.findElement(By.cssSelector("span[class='close'][title='Close']"));
         waitForVisibilityAndClickThanClick(closeNotification);
