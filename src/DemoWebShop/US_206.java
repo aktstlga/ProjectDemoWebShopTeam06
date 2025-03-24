@@ -21,9 +21,7 @@ public class US_206 extends BaseDriver {
         driver.get("https://demowebshop.tricentis.com");
 
         WebElement logIn = driver.findElement(By.className("ico-login"));
-        waitDuration.until(ExpectedConditions.visibilityOf(logIn));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(logIn));
-        actionDriver.moveToElement(logIn).click().build().perform();
+        waitForVisibilityAndClickThanClick(logIn);
 
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         WebElement emailPlaceholder = driver.findElement(By.id("Email"));
@@ -37,9 +35,7 @@ public class US_206 extends BaseDriver {
         actionDriver.moveToElement(passwordPlaceholder).click().sendKeys("Password123").build().perform();
 
         WebElement submitButton = driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
-        waitDuration.until(ExpectedConditions.visibilityOf(submitButton));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(submitButton));
-        actionDriver.moveToElement(submitButton).click().build().perform();
+        waitForVisibilityAndClickThanClick(submitButton);
 
         waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/"));
         Assert.assertTrue("Anasayfaya yönlendirildi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
@@ -61,108 +57,90 @@ public class US_206 extends BaseDriver {
         Assert.assertTrue("Başarılı şekilde sepete eklendi.", addedNotification.getText().contains("The product has been added to your shopping cart"));
 
         WebElement closeNotification = driver.findElement(By.cssSelector("span[class='close'][title='Close']"));
-        waitDuration.until(ExpectedConditions.visibilityOf(closeNotification));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(closeNotification));
-        actionDriver.moveToElement(closeNotification).click().build().perform();
+        waitForVisibilityAndClickThanClick(closeNotification);
 
         WebElement shoppingCartButton = driver.findElement(By.cssSelector("a[href='/cart'][class='ico-cart']"));
-        waitDuration.until(ExpectedConditions.visibilityOf(shoppingCartButton));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(shoppingCartButton));
-        actionDriver.moveToElement(shoppingCartButton).click().build().perform();
+        waitForVisibilityAndClickThanClick(shoppingCartButton);
 
         WebElement goToCartButton = driver.findElement(By.cssSelector("input[type='button'][value='Go to cart']"));
-        waitDuration.until(ExpectedConditions.visibilityOf(goToCartButton));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(goToCartButton));
-        actionDriver.moveToElement(goToCartButton).click().build().perform();
+        waitForVisibilityAndClickThanClick(goToCartButton);
 
         waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/cart"));
         Assert.assertTrue("Shopping Cart kısmına giremedi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/cart"));
 
         WebElement countrySelectList = driver.findElement(By.cssSelector("select[id='CountryId'][name='CountryId']"));
-        waitDuration.until(ExpectedConditions.visibilityOf(countrySelectList));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(countrySelectList));
-        actionDriver.moveToElement(countrySelectList).click().build().perform();
+        waitForVisibilityAndClickThanClick(countrySelectList);
         new Select(countrySelectList).selectByIndex(1);
 
         WebElement stateSelectList = driver.findElement(By.cssSelector("select[id='StateProvinceId'][name='StateProvinceId']"));
-        waitDuration.until(ExpectedConditions.visibilityOf(stateSelectList));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(stateSelectList));
-        actionDriver.moveToElement(stateSelectList).click().build().perform();
+        waitForVisibilityAndClickThanClick(stateSelectList);
         new Select(stateSelectList).selectByIndex(2);
 
         WebElement checkBoxForTermsOfService = driver.findElement(By.id("termsofservice"));
-        waitDuration.until(ExpectedConditions.visibilityOf(checkBoxForTermsOfService));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(checkBoxForTermsOfService));
-        actionDriver.moveToElement(checkBoxForTermsOfService).click().build().perform();
+        waitForVisibilityAndClickThanClick(checkBoxForTermsOfService);
 
         WebElement checkoutBox = driver.findElement(By.cssSelector("button[type='submit'][id='checkout'][name='checkout'][value='checkout']"));
-        waitDuration.until(ExpectedConditions.visibilityOf(checkoutBox));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(checkoutBox));
-        actionDriver.moveToElement(checkoutBox).click().build().perform();
+        waitForVisibilityAndClickThanClick(checkoutBox);
         waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/onepagecheckout"));
         Assert.assertTrue("Checkout'a başarılı şekilde geçemedi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/onepagecheckout"));
 
         WebElement newAddressSelect =driver.findElement(By.xpath("//*[@id='billing-address-select']"));
-        waitDuration.until(ExpectedConditions.visibilityOf(newAddressSelect));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(newAddressSelect));
-        actionDriver.moveToElement(newAddressSelect).click().build().perform();
+        waitForVisibilityAndClickThanClick(newAddressSelect);
         new Select(newAddressSelect).selectByVisibleText("New Address");
 
-
         WebElement firstnameForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_FirstName"));
-        adressFill(firstnameForAddressPlaceholder,"Testing");
+        addressFill(firstnameForAddressPlaceholder,"Testing");
 
         WebElement lastnameForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_LastName"));
-        adressFill(lastnameForAddressPlaceholder,"Tester");
+        addressFill(lastnameForAddressPlaceholder,"Tester");
 
         WebElement emailForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_Email"));
-        adressFill(emailForAddressPlaceholder,"team006test@gmail.com");
+        addressFill(emailForAddressPlaceholder,"team006test@gmail.com");
 
         WebElement companyNameForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_Company"));
-        adressFill(companyNameForAddressPlaceholder,"TechnoStudy");
+        addressFill(companyNameForAddressPlaceholder,"TechnoStudy");
 
         WebElement countryForAddress = driver.findElement(By.id("BillingNewAddress_CountryId"));
-        waitDuration.until(ExpectedConditions.visibilityOf(countryForAddress));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(countryForAddress));
-        actionDriver.moveToElement(countryForAddress).click().build().perform();
+        waitForVisibilityAndClickThanClick(countryForAddress);
         new Select(countryForAddress).selectByIndex(1);
 
         WebElement stateForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_StateProvinceId"));
-        waitDuration.until(ExpectedConditions.visibilityOf(stateForAddressPlaceholder));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(stateForAddressPlaceholder));
-        actionDriver.moveToElement(stateForAddressPlaceholder).click().build().perform();
+        waitForVisibilityAndClickThanClick(stateForAddressPlaceholder);
         waitDuration.until(ExpectedConditions.visibilityOf(stateForAddressPlaceholder));
         waitDuration.until(ExpectedConditions.elementToBeClickable(stateForAddressPlaceholder));
         new Select(stateForAddressPlaceholder).selectByIndex(2);
 
         WebElement cityForFirstAdressPlaceholder = driver.findElement(By.id("BillingNewAddress_City"));
-        adressFill(cityForFirstAdressPlaceholder,"Birmingham");
+        addressFill(cityForFirstAdressPlaceholder,"Birmingham");
 
         WebElement addressForFirstPlaceholder = driver.findElement(By.id("BillingNewAddress_Address1"));
-        adressFill(addressForFirstPlaceholder,"Alabama.City.C");
+        addressFill(addressForFirstPlaceholder,"Alabama.City.C");
 
         WebElement addressForSecondPlaceholder =driver.findElement(By.id("BillingNewAddress_Address2"));
-        adressFill(addressForSecondPlaceholder,"Alabama.City.C.V2");
+        addressFill(addressForSecondPlaceholder,"Alabama.City.C.V2");
 
         WebElement zipPostalCodePlaceholder =driver.findElement(By.id("BillingNewAddress_ZipPostalCode"));
-        adressFill(zipPostalCodePlaceholder,"36043");
+        addressFill(zipPostalCodePlaceholder,"36043");
 
         WebElement phoneNumberPlaceholder = driver.findElement(By.id("BillingNewAddress_PhoneNumber"));
-        adressFill(phoneNumberPlaceholder,"123123123");
+        addressFill(phoneNumberPlaceholder,"123123123");
 
         WebElement faxNumberPlacholder = driver.findElement(By.id("BillingNewAddress_FaxNumber"));
-        adressFill(faxNumberPlacholder,"(123)-456-7890");
+        addressFill(faxNumberPlacholder,"(123)-456-7890");
 
         WebElement submitButtonForAddressFill = driver.findElement(By.xpath("//*[@id='billing-buttons-container']/input"));
-        waitDuration.until(ExpectedConditions.visibilityOf(submitButtonForAddressFill));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(submitButtonForAddressFill));
-        actionDriver.moveToElement(submitButtonForAddressFill).click().build().perform();
+        waitForVisibilityAndClickThanClick(submitButtonForAddressFill);
     }
 
-    public void adressFill(WebElement locatedElement, String sendkeysText) {
+    public void addressFill(WebElement locatedElement, String sendkeysText) {
         waitDuration.until(ExpectedConditions.visibilityOf(locatedElement));
         waitDuration.until(ExpectedConditions.elementToBeClickable(locatedElement));
         locatedElement.clear();
         actionDriver.moveToElement(locatedElement).click().sendKeys(sendkeysText).build().perform();
+    }
+    public void waitForVisibilityAndClickThanClick(WebElement foundLocator){
+        waitDuration.until(ExpectedConditions.visibilityOf(foundLocator));
+        waitDuration.until(ExpectedConditions.elementToBeClickable(foundLocator));
+        actionDriver.moveToElement(foundLocator).click().build().perform();
     }
 }
