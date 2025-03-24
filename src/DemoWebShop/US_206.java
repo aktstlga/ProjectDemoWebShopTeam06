@@ -72,9 +72,10 @@ public class US_206 extends BaseDriver {
         waitForVisibilityAndClickThanClick(countrySelectList);
         new Select(countrySelectList).selectByIndex(1);
 
+        waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("select[id='StateProvinceId'][name='StateProvinceId']")));
         WebElement stateSelectList = driver.findElement(By.cssSelector("select[id='StateProvinceId'][name='StateProvinceId']"));
         waitForVisibilityAndClickThanClick(stateSelectList);
-        new Select(stateSelectList).selectByIndex(2);
+        new Select(stateSelectList).selectByVisibleText("Alabama");
 
         WebElement checkBoxForTermsOfService = driver.findElement(By.id("termsofservice"));
         waitForVisibilityAndClickThanClick(checkBoxForTermsOfService);
@@ -104,11 +105,10 @@ public class US_206 extends BaseDriver {
         waitForVisibilityAndClickThanClick(countryForAddress);
         new Select(countryForAddress).selectByIndex(1);
 
+        waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.id("BillingNewAddress_StateProvinceId")));
         WebElement stateForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_StateProvinceId"));
         waitForVisibilityAndClickThanClick(stateForAddressPlaceholder);
-        waitDuration.until(ExpectedConditions.visibilityOf(stateForAddressPlaceholder));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(stateForAddressPlaceholder));
-        new Select(stateForAddressPlaceholder).selectByIndex(2);
+        new Select(stateForAddressPlaceholder).selectByVisibleText("Alabama");
 
         WebElement cityForFirstAdressPlaceholder = driver.findElement(By.id("BillingNewAddress_City"));
         addressFill(cityForFirstAdressPlaceholder, "Birmingham");
@@ -137,6 +137,12 @@ public class US_206 extends BaseDriver {
 
         WebElement continueButtonShipping = driver.findElement(By.xpath("//*[@id='shipping-buttons-container']/input"));
         waitForVisibilityAndClickThanClick(continueButtonShipping);
+
+        WebElement creditCardPaymentMethod = driver.findElement(By.cssSelector("input[id='paymentmethod_2'][type='radio']"));
+        waitForVisibilityAndClickThanClick(creditCardPaymentMethod);
+
+        WebElement continueButtonPayment=driver.findElement(By.xpath("//*[@id='payment-method-buttons-container']/input"));
+        waitForVisibilityAndClickThanClick(continueButtonPayment);
     }
 
     public void addressFill(WebElement locatedElement, String sendkeysText) {
