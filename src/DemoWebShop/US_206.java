@@ -75,6 +75,7 @@ public class US_206 extends BaseDriver {
         waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("select[id='StateProvinceId'][name='StateProvinceId']")));
         WebElement stateSelectList = driver.findElement(By.cssSelector("select[id='StateProvinceId'][name='StateProvinceId']"));
         waitForVisibilityAndClickThanClick(stateSelectList);
+        waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("select[id='StateProvinceId'][name='StateProvinceId']"), "AA (Armed Forces Americas)"));
         new Select(stateSelectList).selectByVisibleText("Alabama");
 
         WebElement checkBoxForTermsOfService = driver.findElement(By.id("termsofservice"));
@@ -90,43 +91,43 @@ public class US_206 extends BaseDriver {
         new Select(newAddressSelect).selectByVisibleText("New Address");
 
         WebElement firstnameForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_FirstName"));
-        addressFill(firstnameForAddressPlaceholder, "Testing");
+        fillingThePlaceholderWithWait(firstnameForAddressPlaceholder, "Testing");
 
         WebElement lastnameForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_LastName"));
-        addressFill(lastnameForAddressPlaceholder, "Tester");
+        fillingThePlaceholderWithWait(lastnameForAddressPlaceholder, "Tester");
 
         WebElement emailForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_Email"));
-        addressFill(emailForAddressPlaceholder, "team006test@gmail.com");
+        fillingThePlaceholderWithWait(emailForAddressPlaceholder, "team006test@gmail.com");
 
         WebElement companyNameForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_Company"));
-        addressFill(companyNameForAddressPlaceholder, "TechnoStudy");
+        fillingThePlaceholderWithWait(companyNameForAddressPlaceholder, "TechnoStudy");
 
         WebElement countryForAddress = driver.findElement(By.id("BillingNewAddress_CountryId"));
         waitForVisibilityAndClickThanClick(countryForAddress);
         new Select(countryForAddress).selectByIndex(1);
 
-        waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.id("BillingNewAddress_StateProvinceId")));
         WebElement stateForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_StateProvinceId"));
+        waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.id("BillingNewAddress_StateProvinceId"), "AA (Armed Forces Americas)"));
         waitForVisibilityAndClickThanClick(stateForAddressPlaceholder);
         new Select(stateForAddressPlaceholder).selectByVisibleText("Alabama");
 
-        WebElement cityForFirstAdressPlaceholder = driver.findElement(By.id("BillingNewAddress_City"));
-        addressFill(cityForFirstAdressPlaceholder, "Birmingham");
+        WebElement cityForFirstAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_City"));
+        fillingThePlaceholderWithWait(cityForFirstAddressPlaceholder, "Birmingham");
 
         WebElement addressForFirstPlaceholder = driver.findElement(By.id("BillingNewAddress_Address1"));
-        addressFill(addressForFirstPlaceholder, "Alabama.City.C");
+        fillingThePlaceholderWithWait(addressForFirstPlaceholder, "Alabama.City.C");
 
         WebElement addressForSecondPlaceholder = driver.findElement(By.id("BillingNewAddress_Address2"));
-        addressFill(addressForSecondPlaceholder, "Alabama.City.C.V2");
+        fillingThePlaceholderWithWait(addressForSecondPlaceholder, "Alabama.City.C.V2");
 
         WebElement zipPostalCodePlaceholder = driver.findElement(By.id("BillingNewAddress_ZipPostalCode"));
-        addressFill(zipPostalCodePlaceholder, "36043");
+        fillingThePlaceholderWithWait(zipPostalCodePlaceholder, "36043");
 
         WebElement phoneNumberPlaceholder = driver.findElement(By.id("BillingNewAddress_PhoneNumber"));
-        addressFill(phoneNumberPlaceholder, "123123123");
+        fillingThePlaceholderWithWait(phoneNumberPlaceholder, "123123123");
 
         WebElement faxNumberPlaceholder = driver.findElement(By.id("BillingNewAddress_FaxNumber"));
-        addressFill(faxNumberPlaceholder, "(123)-456-7890");
+        fillingThePlaceholderWithWait(faxNumberPlaceholder, "(123)-456-7890");
 
         WebElement submitButtonForAddressFill = driver.findElement(By.xpath("//*[@id='billing-buttons-container']/input"));
         waitForVisibilityAndClickThanClick(submitButtonForAddressFill);
@@ -135,17 +136,20 @@ public class US_206 extends BaseDriver {
         WebElement checkoutBoxShipping = driver.findElement(By.id("PickUpInStore"));
         waitForVisibilityAndClickThanClick(checkoutBoxShipping);
 
-        WebElement continueButtonShipping = driver.findElement(By.xpath("//*[@id='shipping-buttons-container']/input"));
-        waitForVisibilityAndClickThanClick(continueButtonShipping);
+        WebElement shippingContinueButton = driver.findElement(By.cssSelector("input[title='Continue'][value='Continue'][onclick='Shipping.save()']"));
+        shippingContinueButton.click();
 
-        WebElement creditCardPaymentMethod = driver.findElement(By.cssSelector("input[id='paymentmethod_2'][type='radio']"));
+        waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='paymentmethod_2']")));
+        WebElement creditCardPaymentMethod = driver.findElement(By.xpath("//*[@id='paymentmethod_2']"));
         waitForVisibilityAndClickThanClick(creditCardPaymentMethod);
 
-        WebElement continueButtonPayment=driver.findElement(By.xpath("//*[@id='payment-method-buttons-container']/input"));
-        waitForVisibilityAndClickThanClick(continueButtonPayment);
+        waitDuration.until(ExpectedConditions.elementToBeSelected(creditCardPaymentMethod));
+        WebElement continueButtonPayment = driver.findElement(By.cssSelector("input[value='Continue'][onclick='PaymentMethod.save()"));
+        continueButtonPayment.click();
+
     }
 
-    public void addressFill(WebElement locatedElement, String sendkeysText) {
+    public void fillingThePlaceholderWithWait(WebElement locatedElement, String sendkeysText) {
         waitDuration.until(ExpectedConditions.visibilityOf(locatedElement));
         waitDuration.until(ExpectedConditions.elementToBeClickable(locatedElement));
         locatedElement.clear();
