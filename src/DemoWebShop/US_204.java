@@ -20,6 +20,10 @@ public class US_204 extends BaseDriver {
         emailPlaceholder.sendKeys("team006test@gmail.com");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
+        WebElement passwordPlaceHolder=driver.findElement(By.cssSelector("[type='password']"));
+        passwordPlaceHolder.sendKeys("Password123");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
         driver.quit();
 
 
