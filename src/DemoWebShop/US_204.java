@@ -16,6 +16,10 @@ public class US_204 extends BaseDriver {
         login.click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
+        WebElement emailPlaceholder=driver.findElement(By.id("Email"));
+        emailPlaceholder.sendKeys("team006test@gmail.com");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
         driver.quit();
 
 
