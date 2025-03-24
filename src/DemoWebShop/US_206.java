@@ -84,21 +84,21 @@ public class US_206 extends BaseDriver {
         waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/onepagecheckout"));
         Assert.assertTrue("Checkout'a başarılı şekilde geçemedi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/onepagecheckout"));
 
-        WebElement newAddressSelect =driver.findElement(By.xpath("//*[@id='billing-address-select']"));
+        WebElement newAddressSelect = driver.findElement(By.xpath("//*[@id='billing-address-select']"));
         waitForVisibilityAndClickThanClick(newAddressSelect);
         new Select(newAddressSelect).selectByVisibleText("New Address");
 
         WebElement firstnameForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_FirstName"));
-        addressFill(firstnameForAddressPlaceholder,"Testing");
+        addressFill(firstnameForAddressPlaceholder, "Testing");
 
         WebElement lastnameForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_LastName"));
-        addressFill(lastnameForAddressPlaceholder,"Tester");
+        addressFill(lastnameForAddressPlaceholder, "Tester");
 
         WebElement emailForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_Email"));
-        addressFill(emailForAddressPlaceholder,"team006test@gmail.com");
+        addressFill(emailForAddressPlaceholder, "team006test@gmail.com");
 
         WebElement companyNameForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_Company"));
-        addressFill(companyNameForAddressPlaceholder,"TechnoStudy");
+        addressFill(companyNameForAddressPlaceholder, "TechnoStudy");
 
         WebElement countryForAddress = driver.findElement(By.id("BillingNewAddress_CountryId"));
         waitForVisibilityAndClickThanClick(countryForAddress);
@@ -111,25 +111,32 @@ public class US_206 extends BaseDriver {
         new Select(stateForAddressPlaceholder).selectByIndex(2);
 
         WebElement cityForFirstAdressPlaceholder = driver.findElement(By.id("BillingNewAddress_City"));
-        addressFill(cityForFirstAdressPlaceholder,"Birmingham");
+        addressFill(cityForFirstAdressPlaceholder, "Birmingham");
 
         WebElement addressForFirstPlaceholder = driver.findElement(By.id("BillingNewAddress_Address1"));
-        addressFill(addressForFirstPlaceholder,"Alabama.City.C");
+        addressFill(addressForFirstPlaceholder, "Alabama.City.C");
 
-        WebElement addressForSecondPlaceholder =driver.findElement(By.id("BillingNewAddress_Address2"));
-        addressFill(addressForSecondPlaceholder,"Alabama.City.C.V2");
+        WebElement addressForSecondPlaceholder = driver.findElement(By.id("BillingNewAddress_Address2"));
+        addressFill(addressForSecondPlaceholder, "Alabama.City.C.V2");
 
-        WebElement zipPostalCodePlaceholder =driver.findElement(By.id("BillingNewAddress_ZipPostalCode"));
-        addressFill(zipPostalCodePlaceholder,"36043");
+        WebElement zipPostalCodePlaceholder = driver.findElement(By.id("BillingNewAddress_ZipPostalCode"));
+        addressFill(zipPostalCodePlaceholder, "36043");
 
         WebElement phoneNumberPlaceholder = driver.findElement(By.id("BillingNewAddress_PhoneNumber"));
-        addressFill(phoneNumberPlaceholder,"123123123");
+        addressFill(phoneNumberPlaceholder, "123123123");
 
-        WebElement faxNumberPlacholder = driver.findElement(By.id("BillingNewAddress_FaxNumber"));
-        addressFill(faxNumberPlacholder,"(123)-456-7890");
+        WebElement faxNumberPlaceholder = driver.findElement(By.id("BillingNewAddress_FaxNumber"));
+        addressFill(faxNumberPlaceholder, "(123)-456-7890");
 
         WebElement submitButtonForAddressFill = driver.findElement(By.xpath("//*[@id='billing-buttons-container']/input"));
         waitForVisibilityAndClickThanClick(submitButtonForAddressFill);
+        waitDuration.until(ExpectedConditions.invisibilityOf(submitButtonForAddressFill));
+
+        WebElement checkoutBoxShipping = driver.findElement(By.id("PickUpInStore"));
+        waitForVisibilityAndClickThanClick(checkoutBoxShipping);
+
+        WebElement continueButtonShipping = driver.findElement(By.xpath("//*[@id='shipping-buttons-container']/input"));
+        waitForVisibilityAndClickThanClick(continueButtonShipping);
     }
 
     public void addressFill(WebElement locatedElement, String sendkeysText) {
@@ -138,7 +145,8 @@ public class US_206 extends BaseDriver {
         locatedElement.clear();
         actionDriver.moveToElement(locatedElement).click().sendKeys(sendkeysText).build().perform();
     }
-    public void waitForVisibilityAndClickThanClick(WebElement foundLocator){
+
+    public void waitForVisibilityAndClickThanClick(WebElement foundLocator) {
         waitDuration.until(ExpectedConditions.visibilityOf(foundLocator));
         waitDuration.until(ExpectedConditions.elementToBeClickable(foundLocator));
         actionDriver.moveToElement(foundLocator).click().build().perform();
