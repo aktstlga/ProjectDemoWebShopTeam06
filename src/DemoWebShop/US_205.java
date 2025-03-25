@@ -38,7 +38,7 @@ public class US_205 extends BaseDriver {
         driver.quit();
     }
     @Test
-    public void falseEmail(){
+    public void falsePassword(){
         driver.get("https://demowebshop.tricentis.com/");
 
         WebElement login = driver.findElement(By.className("ico-login"));
@@ -60,5 +60,27 @@ public class US_205 extends BaseDriver {
 
         driver.quit();
     }
+    @Test
+    public void falseEmail(){
+        driver.get("https://demowebshop.tricentis.com/");
 
+        WebElement login = driver.findElement(By.className("ico-login"));
+        waitForVisibilityAndClickThanClick(login);
+
+        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
+
+        WebElement email = driver.findElement(By.className("email"));
+        fillingThePlaceholderWithWait(email, "");
+
+        WebElement password = driver.findElement(By.className("password"));
+        fillingThePlaceholderWithWait(password,"Password123");
+
+        WebElement submitButton = driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
+        waitForVisibilityAndClickThanClick(submitButton);
+
+        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com"));
+        Assert.assertTrue("Aranan mesaj bulunamadı.",driver.getCurrentUrl().contains("https://demowebshop.tricentis.com"));
+
+        driver.quit();
+    }
 }
