@@ -23,16 +23,13 @@ public class US_206 extends BaseDriver {
         WebElement logIn = driver.findElement(By.className("ico-login"));
         waitForVisibilityAndClickThanClick(logIn);
 
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
+        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
+
         WebElement emailPlaceholder = driver.findElement(By.id("Email"));
-        waitDuration.until(ExpectedConditions.visibilityOf(emailPlaceholder));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(emailPlaceholder));
-        actionDriver.moveToElement(emailPlaceholder).click().sendKeys("team006test@gmail.com").build().perform();
+        fillingThePlaceholderWithWait(emailPlaceholder,"team006test@gmail.com");
 
         WebElement passwordPlaceholder = driver.findElement(By.id("Password"));
-        waitDuration.until(ExpectedConditions.visibilityOf(passwordPlaceholder));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(passwordPlaceholder));
-        actionDriver.moveToElement(passwordPlaceholder).click().sendKeys("Password123").build().perform();
+        fillingThePlaceholderWithWait(passwordPlaceholder,"Password123");
 
         WebElement submitButton = driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
         waitForVisibilityAndClickThanClick(submitButton);
@@ -71,12 +68,14 @@ public class US_206 extends BaseDriver {
         WebElement countrySelectList = driver.findElement(By.cssSelector("select[id='CountryId'][name='CountryId']"));
         waitForVisibilityAndClickThanClick(countrySelectList);
         new Select(countrySelectList).selectByIndex(1);
+        countrySelectList.click();
 
         waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("select[id='StateProvinceId'][name='StateProvinceId']")));
         WebElement stateSelectList = driver.findElement(By.cssSelector("select[id='StateProvinceId'][name='StateProvinceId']"));
         waitForVisibilityAndClickThanClick(stateSelectList);
         waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("select[id='StateProvinceId'][name='StateProvinceId']"), "AA (Armed Forces Americas)"));
         new Select(stateSelectList).selectByVisibleText("Alabama");
+        stateSelectList.click();
 
         WebElement checkBoxForTermsOfService = driver.findElement(By.id("termsofservice"));
         waitForVisibilityAndClickThanClick(checkBoxForTermsOfService);
@@ -105,11 +104,13 @@ public class US_206 extends BaseDriver {
         WebElement countryForAddress = driver.findElement(By.id("BillingNewAddress_CountryId"));
         waitForVisibilityAndClickThanClick(countryForAddress);
         new Select(countryForAddress).selectByIndex(1);
+        countryForAddress.click();
 
         WebElement stateForAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_StateProvinceId"));
         waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.id("BillingNewAddress_StateProvinceId"), "AA (Armed Forces Americas)"));
         waitForVisibilityAndClickThanClick(stateForAddressPlaceholder);
         new Select(stateForAddressPlaceholder).selectByVisibleText("Alabama");
+        stateForAddressPlaceholder.click();
 
         WebElement cityForFirstAddressPlaceholder = driver.findElement(By.id("BillingNewAddress_City"));
         fillingThePlaceholderWithWait(cityForFirstAddressPlaceholder, "Birmingham");
@@ -147,18 +148,34 @@ public class US_206 extends BaseDriver {
         WebElement continueButtonPayment = driver.findElement(By.cssSelector("input[value='Continue'][onclick='PaymentMethod.save()"));
         continueButtonPayment.click();
 
-    }
+        waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.id("CreditCardType")));
+        WebElement selectCreditCard = driver.findElement(By.id("CreditCardType"));
+        waitForVisibilityAndClickThanClick(selectCreditCard);
+        waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.id("CreditCardType"),"Visa"));
+        new Select(selectCreditCard).selectByVisibleText("Visa");
+        selectCreditCard.click();
 
-    public void fillingThePlaceholderWithWait(WebElement locatedElement, String sendkeysText) {
-        waitDuration.until(ExpectedConditions.visibilityOf(locatedElement));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(locatedElement));
-        locatedElement.clear();
-        actionDriver.moveToElement(locatedElement).click().sendKeys(sendkeysText).build().perform();
-    }
+        WebElement cardholderNamePlaceholder =driver.findElement(By.id("CardholderName"));
+        fillingThePlaceholderWithWait(cardholderNamePlaceholder,"Tester");
 
-    public void waitForVisibilityAndClickThanClick(WebElement foundLocator) {
-        waitDuration.until(ExpectedConditions.visibilityOf(foundLocator));
-        waitDuration.until(ExpectedConditions.elementToBeClickable(foundLocator));
-        actionDriver.moveToElement(foundLocator).click().build().perform();
+        WebElement cardNumberPlaceholder =driver.findElement(By.id("CardNumber"));
+        fillingThePlaceholderWithWait(cardNumberPlaceholder,"4242 4242 4242 4242");
+
+        waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.id("ExpireMonth")));
+        WebElement selectMonth = driver.findElement(By.id("ExpireMonth"));
+        waitForVisibilityAndClickThanClick(selectMonth);
+        waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.id("ExpireMonth"),"01"));
+        new Select(selectMonth).selectByVisibleText("01");
+        selectMonth.click();
+
+        waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.id("ExpireYear")));
+        WebElement selectYear = driver.findElement(By.id("ExpireYear"));
+        waitForVisibilityAndClickThanClick(selectYear);
+        waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.id("ExpireYear"),"2025"));
+        new Select(selectYear).selectByVisibleText("2032");
+        selectYear.click();
+
+        WebElement cardCodePlaceholder = driver.findElement(By.id("CardCode"));
+        fillingThePlaceholderWithWait(cardCodePlaceholder,"123");
     }
 }
