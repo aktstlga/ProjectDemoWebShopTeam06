@@ -26,10 +26,10 @@ public class US_206 extends BaseDriver {
         waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
 
         WebElement emailPlaceholder = driver.findElement(By.id("Email"));
-        fillingThePlaceholderWithWait(emailPlaceholder,"team006test@gmail.com");
+        fillingThePlaceholderWithWait(emailPlaceholder, "team006test@gmail.com");
 
         WebElement passwordPlaceholder = driver.findElement(By.id("Password"));
-        fillingThePlaceholderWithWait(passwordPlaceholder,"Password123");
+        fillingThePlaceholderWithWait(passwordPlaceholder, "Password123");
 
         WebElement submitButton = driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
         waitForVisibilityAndClickThanClick(submitButton);
@@ -151,31 +151,48 @@ public class US_206 extends BaseDriver {
         waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.id("CreditCardType")));
         WebElement selectCreditCard = driver.findElement(By.id("CreditCardType"));
         waitForVisibilityAndClickThanClick(selectCreditCard);
-        waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.id("CreditCardType"),"Visa"));
+        waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.id("CreditCardType"), "Visa"));
         new Select(selectCreditCard).selectByVisibleText("Visa");
         selectCreditCard.click();
 
-        WebElement cardholderNamePlaceholder =driver.findElement(By.id("CardholderName"));
-        fillingThePlaceholderWithWait(cardholderNamePlaceholder,"Tester");
+        WebElement cardholderNamePlaceholder = driver.findElement(By.id("CardholderName"));
+        fillingThePlaceholderWithWait(cardholderNamePlaceholder, "Tester");
 
-        WebElement cardNumberPlaceholder =driver.findElement(By.id("CardNumber"));
-        fillingThePlaceholderWithWait(cardNumberPlaceholder,"4242 4242 4242 4242");
+        WebElement cardNumberPlaceholder = driver.findElement(By.id("CardNumber"));
+        fillingThePlaceholderWithWait(cardNumberPlaceholder, "4242 4242 4242 4242");
 
         waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.id("ExpireMonth")));
         WebElement selectMonth = driver.findElement(By.id("ExpireMonth"));
         waitForVisibilityAndClickThanClick(selectMonth);
-        waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.id("ExpireMonth"),"01"));
+        waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.id("ExpireMonth"), "01"));
         new Select(selectMonth).selectByVisibleText("01");
         selectMonth.click();
 
         waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.id("ExpireYear")));
         WebElement selectYear = driver.findElement(By.id("ExpireYear"));
         waitForVisibilityAndClickThanClick(selectYear);
-        waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.id("ExpireYear"),"2025"));
+        waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.id("ExpireYear"), "2025"));
         new Select(selectYear).selectByVisibleText("2032");
         selectYear.click();
 
         WebElement cardCodePlaceholder = driver.findElement(By.id("CardCode"));
-        fillingThePlaceholderWithWait(cardCodePlaceholder,"123");
+        fillingThePlaceholderWithWait(cardCodePlaceholder, "123");
+
+        WebElement continueButtonForPayment = driver.findElement(By.xpath("//*[@id='payment-info-buttons-container']/input"));
+        continueButtonForPayment.click();
+
+        waitDuration.until(ExpectedConditions.invisibilityOf(continueButtonForPayment));
+        WebElement productOnTheBasket = driver.findElement(By.cssSelector("a[href='/141-inch-laptop'][class='product-name']"));
+        Assert.assertTrue("Doğru ürün listede değil.", productOnTheBasket.getText().contains("14.1-inch Laptop"));
+
+        WebElement productQuantity = driver.findElement(By.cssSelector("td[class='qty nobr']> *:nth-child(2)"));
+        Assert.assertTrue("Üründen 1 adet yok.", productQuantity.getText().contains("1"));
+
+        WebElement confirmOrderButton = driver.findElement(By.xpath("//*[@id='confirm-order-buttons-container']/input"));
+        actionDriver.scrollToElement(confirmOrderButton).moveToElement(confirmOrderButton).click().build().perform();
+
+        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/checkout/completed/"));
+        WebElement confirmMesseage=driver.findElement(By.cssSelector("div[class='title']> *:nth-child(1)"));
+        Assert.assertTrue("Başarılı onay mesajı alınamadı.",confirmMesseage.getText().contains("Your order has been successfully processed!"));
     }
 }

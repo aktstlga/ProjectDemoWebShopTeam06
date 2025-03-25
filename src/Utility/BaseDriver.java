@@ -21,6 +21,7 @@ public class BaseDriver {
     static {
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("autofill.profile_enabled", false);
+        prefs.put("autofill.credit_card_enabled", false);
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("prefs", prefs);
         driver = new ChromeDriver(options);
