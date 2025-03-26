@@ -17,7 +17,7 @@ public class US_206 extends BaseDriver {
     WebDriverWait waitDuration = new WebDriverWait(driver, Duration.ofSeconds(120));
 
     @Test
-    public void logInToAccount() {
+    public void ordering() {
         driver.get("https://demowebshop.tricentis.com");
 
         WebElement logIn = driver.findElement(By.className("ico-login"));
