@@ -55,6 +55,7 @@ public class US_207 extends BaseDriver {
     }
     @Test
     public void registeredUserPoll(){
+        Driver();
         driver.get("https://demowebshop.tricentis.com");
 
         WebElement logIn = driver.findElement(By.className("ico-login"));
