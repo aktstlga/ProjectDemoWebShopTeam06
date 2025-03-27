@@ -16,7 +16,7 @@ public class US_207 extends BaseDriver {
     WebDriverWait waitDuration = new WebDriverWait(driver, Duration.ofSeconds(120));
 
     @Test
-    public void unregisteredUserPoll() throws InterruptedException {
+    public void unregisteredUserPoll() {
         driver.get("https://demowebshop.tricentis.com");
         waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("div[class='block block-poll']> *:nth-child(1)> *:nth-child(1)"), "COMMUNITY POLL"));
 
