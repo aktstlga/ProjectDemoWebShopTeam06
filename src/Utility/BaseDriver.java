@@ -17,10 +17,11 @@ import java.util.Map;
 public class BaseDriver {
     public static WebDriver driver;
 
-    Actions actionDriver = new Actions(driver);
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
+    public  Actions actionDriver = new Actions(driver);
+    public  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
     static {
+
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("autofill.profile_enabled", false);
         prefs.put("autofill.credit_card_enabled", false);
@@ -46,13 +47,14 @@ public class BaseDriver {
         locatedElement.clear();
         actionDriver.moveToElement(locatedElement).click().sendKeys(sendkeysText).build().perform();
     }
+
     public void waitForVisibilityAndClickThanClick(WebElement foundLocator) {
         wait.until(ExpectedConditions.visibilityOf(foundLocator));
         wait.until(ExpectedConditions.elementToBeClickable(foundLocator));
         actionDriver.moveToElement(foundLocator).click().build().perform();
     }
 
-    public void loginMethodAccordingToUs_204(){
+    public void loginMethodAccordingToUs_204() {
         WebElement login = driver.findElement(By.className("ico-login"));
         waitForVisibilityAndClickThanClick(login);
 

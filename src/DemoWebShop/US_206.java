@@ -13,9 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class US_206 extends BaseDriver {
-    Actions actionDriver = new Actions(driver);
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
-    private WebDriverWait waitDuration1;
 
     @Test
     public void ordering() {
