@@ -49,7 +49,7 @@ public class US_207 extends BaseDriver {
 
         waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div[class='poll-vote-error'][id='block-poll-vote-error-1']")));
         WebElement notMesseage=driver.findElement(By.cssSelector("div[class='poll-vote-error'][id='block-poll-vote-error-1']"));
-        Assert.assertTrue("Notification not displayed",notMesseage.isDisplayed());
+        Assert.assertTrue("Uyarı mesajı görüntülenemedi",notMesseage.isDisplayed());
 
         loginMethodAccordingToUs_204();
 
