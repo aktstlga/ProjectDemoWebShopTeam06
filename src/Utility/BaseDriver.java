@@ -1,5 +1,7 @@
 package Utility;
 
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,8 +16,10 @@ import java.util.Map;
 
 public class BaseDriver {
     public static WebDriver driver;
+
     Actions actionDriver = new Actions(driver);
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
+
     static {
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("autofill.profile_enabled", false);
@@ -46,5 +50,28 @@ public class BaseDriver {
         wait.until(ExpectedConditions.visibilityOf(foundLocator));
         wait.until(ExpectedConditions.elementToBeClickable(foundLocator));
         actionDriver.moveToElement(foundLocator).click().build().perform();
+    }
+
+    public void loginMethodAccordingToUs_204(){
+        WebElement login = driver.findElement(By.className("ico-login"));
+        waitForVisibilityAndClickThanClick(login);
+
+        wait.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
+
+        WebElement emailPlaceholder = driver.findElement(By.id("Email"));
+        fillingThePlaceholderWithWait(emailPlaceholder, "team006test@gmail.com");
+
+        WebElement passwordPlaceHolder = driver.findElement(By.cssSelector("[type='password']"));
+        fillingThePlaceholderWithWait(passwordPlaceHolder, "Password123");
+
+        WebElement loginButton = driver.findElement(By.xpath("//input[@class='button-1 login-button']"));
+        waitForVisibilityAndClickThanClick(loginButton);
+
+        wait.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/"));
+        Assert.assertTrue("Anasayfaya yönlendirilemedi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
+
+        WebElement loggedAccount = driver.findElement(By.cssSelector("a[href='/customer/info'][class='account']"));
+        wait.until(ExpectedConditions.visibilityOf(loggedAccount));
+        Assert.assertTrue("Doğru hesaba giriş yapılamadı.", loggedAccount.getText().contains("team006test@gmail.com"));
     }
 }

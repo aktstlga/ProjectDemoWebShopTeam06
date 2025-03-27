@@ -51,33 +51,7 @@ public class US_207 extends BaseDriver {
         WebElement notMesseage=driver.findElement(By.cssSelector("div[class='poll-vote-error'][id='block-poll-vote-error-1']"));
         Assert.assertTrue("Notification not displayed",notMesseage.isDisplayed());
 
-        driver.quit();
-    }
-    @Test
-    public void registeredUserPoll(){
-        Driver();
-        driver.get("https://demowebshop.tricentis.com");
-
-        WebElement logIn = driver.findElement(By.className("ico-login"));
-        waitForVisibilityAndClickThanClick(logIn);
-
-        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
-
-        WebElement emailPlaceholder = driver.findElement(By.id("Email"));
-        fillingThePlaceholderWithWait(emailPlaceholder, "team006test@gmail.com");
-
-        WebElement passwordPlaceholder = driver.findElement(By.id("Password"));
-        fillingThePlaceholderWithWait(passwordPlaceholder, "Password123");
-
-        WebElement submitButton = driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
-        waitForVisibilityAndClickThanClick(submitButton);
-
-        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/"));
-        Assert.assertTrue("Anasayfaya yönlendirilemedi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
-
-        WebElement loggedAccount = driver.findElement(By.cssSelector("a[href='/customer/info'][class='account']"));
-        waitDuration.until(ExpectedConditions.visibilityOf(loggedAccount));
-        Assert.assertTrue("Doğru hesaba giriş yapılamadı", loggedAccount.getText().contains("team006test@gmail.com"));
+        loginMethodAccordingToUs_204();
 
         waitDuration.until(ExpectedConditions.textToBePresentInElementLocated(By.cssSelector("div[class='block block-poll']> *:nth-child(1)> *:nth-child(1)"), "COMMUNITY POLL"));
 
