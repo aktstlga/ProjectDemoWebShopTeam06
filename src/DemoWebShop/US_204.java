@@ -1,35 +1,46 @@
 package DemoWebShop;
 
 import Utility.BaseDriver;
+import Utility.Myfunc;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 public class US_204 extends BaseDriver {
+    Actions actionDriver = new Actions(driver);
+    WebDriverWait waitDuraction = new WebDriverWait(driver, Duration.ofSeconds(120));
+
     @Test
     public void Login() {
         driver.get("https://demowebshop.tricentis.com/");
 
         WebElement login = driver.findElement(By.className("ico-login"));
-        login.click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        waitForVisibilityAndClickThanClick(login);
+
+        waitDuraction.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
 
         WebElement emailPlaceholder = driver.findElement(By.id("Email"));
-        emailPlaceholder.sendKeys("team006test@gmail.com");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        fillingThePlaceholderWithWait(emailPlaceholder, "team006test@gmail.com");
 
         WebElement passwordPlaceHolder = driver.findElement(By.cssSelector("[type='password']"));
-        passwordPlaceHolder.sendKeys("Password123");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        fillingThePlaceholderWithWait(passwordPlaceHolder, "Password123");
 
         WebElement loginButton = driver.findElement(By.xpath("//input[@class='button-1 login-button']"));
-        loginButton.click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        waitForVisibilityAndClickThanClick(loginButton);
+
+        waitDuraction.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/"));
+        Assert.assertTrue("Anasayfaya yönlendirilemedi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
+
+        WebElement loggedAccount = driver.findElement(By.cssSelector("a[href='/customer/info'][class='account']"));
+        waitDuraction.until(ExpectedConditions.visibilityOf(loggedAccount));
+        Assert.assertTrue("Doğru hesaba giriş yapılamadı.", loggedAccount.getText().contains("team006test@gmail.com"));
 
         driver.quit();
-
-
     }
 }
