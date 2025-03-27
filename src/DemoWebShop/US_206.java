@@ -21,26 +21,7 @@ public class US_206 extends BaseDriver {
     public void ordering() {
         driver.get("https://demowebshop.tricentis.com");
 
-        WebElement logIn = driver.findElement(By.className("ico-login"));
-        waitForVisibilityAndClickThanClick(logIn);
-
-        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
-
-        WebElement emailPlaceholder = driver.findElement(By.id("Email"));
-        fillingThePlaceholderWithWait(emailPlaceholder, "team006test@gmail.com");
-
-        WebElement passwordPlaceholder = driver.findElement(By.id("Password"));
-        fillingThePlaceholderWithWait(passwordPlaceholder, "Password123");
-
-        WebElement submitButton = driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
-        waitForVisibilityAndClickThanClick(submitButton);
-
-        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/"));
-        Assert.assertTrue("Anasayfaya yönlendirilemedi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
-
-        WebElement loggedAccount = driver.findElement(By.cssSelector("a[href='/customer/info'][class='account']"));
-        waitDuration.until(ExpectedConditions.visibilityOf(loggedAccount));
-        Assert.assertTrue("Doğru hesaba giriş yapılamadı", loggedAccount.getText().contains("team006test@gmail.com"));
+        loginMethodAccordingToUs_204();
 
         WebElement featuredProduct = driver.findElement(By.cssSelector("div[class='product-item'][data-productid='31']"));
         waitDuration.until(ExpectedConditions.visibilityOf(featuredProduct));
@@ -151,7 +132,6 @@ public class US_206 extends BaseDriver {
 
             WebElement submitButtonForAddressFill = driver.findElement(By.xpath("//*[@id='billing-buttons-container']/input"));
             waitForVisibilityAndClickThanClick(submitButtonForAddressFill);
-
         }
 
         waitDuration.until(ExpectedConditions.visibilityOfElementLocated(By.id("PickUpInStore")));

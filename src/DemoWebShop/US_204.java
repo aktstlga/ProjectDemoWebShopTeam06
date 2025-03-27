@@ -1,7 +1,6 @@
 package DemoWebShop;
 
 import Utility.BaseDriver;
-import Utility.Myfunc;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -14,7 +13,7 @@ import java.time.Duration;
 
 public class US_204 extends BaseDriver {
     Actions actionDriver = new Actions(driver);
-    WebDriverWait waitDuraction = new WebDriverWait(driver, Duration.ofSeconds(120));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
     @Test
     public void Login() {
@@ -23,7 +22,7 @@ public class US_204 extends BaseDriver {
         WebElement login = driver.findElement(By.className("ico-login"));
         waitForVisibilityAndClickThanClick(login);
 
-        waitDuraction.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
+        wait.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
 
         WebElement emailPlaceholder = driver.findElement(By.id("Email"));
         fillingThePlaceholderWithWait(emailPlaceholder, "team006test@gmail.com");
@@ -34,11 +33,11 @@ public class US_204 extends BaseDriver {
         WebElement loginButton = driver.findElement(By.xpath("//input[@class='button-1 login-button']"));
         waitForVisibilityAndClickThanClick(loginButton);
 
-        waitDuraction.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/"));
+        wait.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/"));
         Assert.assertTrue("Anasayfaya yönlendirilemedi.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com/"));
 
         WebElement loggedAccount = driver.findElement(By.cssSelector("a[href='/customer/info'][class='account']"));
-        waitDuraction.until(ExpectedConditions.visibilityOf(loggedAccount));
+        wait.until(ExpectedConditions.visibilityOf(loggedAccount));
         Assert.assertTrue("Doğru hesaba giriş yapılamadı.", loggedAccount.getText().contains("team006test@gmail.com"));
 
         driver.quit();
