@@ -27,7 +27,15 @@ public class US_209 extends BaseDriver {
         WebElement account= driver.findElement(By.xpath("(//a[@class='account'])[1]"));
         wait.until(ExpectedConditions.visibilityOf(account));
         account.click();
-
+        WebElement orders= driver.findElement(By.xpath("(//*[text()='Orders'])[1]"));
+        wait.until(ExpectedConditions.visibilityOf(orders));
+        orders.click();
+        WebElement details= driver.findElement(By.xpath("(//input[@value='Details'])[1]"));
+        wait.until(ExpectedConditions.visibilityOf(details));
+        details.click();
+        WebElement pdfbutton= driver.findElement(By.xpath("//a[@class='button-2 pdf-order-button']"));
+        wait.until(ExpectedConditions.visibilityOf(pdfbutton));
+        pdfbutton.click();
 
     }
 }
