@@ -3,10 +3,12 @@ package DemoWebShop;
 import Utility.BaseDriver;
 import Utility.Myfunc;
 import com.google.common.annotations.VisibleForTesting;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Wait;
 
 public class US_203 extends BaseDriver {
     @Test
@@ -57,12 +59,29 @@ public class US_203 extends BaseDriver {
 
         Myfunc.wait(5);
 
+        WebElement login = driver.findElement(By.xpath("//*[text()='Log in']"));
+        Actions actionn = new Actions(driver);
+        actionn.moveToElement(login).click().build().perform();
 
+        WebElement email = driver.findElement(By.id("Email"));
+        Actions action8 = new Actions(driver);
+        action8.moveToElement(email).click().sendKeys("etili7@hotmail.com").build().perform();
 
+        WebElement password = driver.findElement(By.id("Password"));
+        Actions action9 = new Actions(driver);
+        action9.moveToElement(password).click().sendKeys("123456").build().perform();
 
+        WebElement btnlogin = driver.findElement(By.xpath("//*[@class='button-1 login-button']"));
+        Actions action10 = new Actions(driver);
+        action10.moveToElement(btnlogin).click().build().perform();
 
+        WebElement btnnLogOut = driver.findElement(By.xpath("//*[@class='ico-logout']"));
+        Actions action111 = new Actions(driver);
+        action111.moveToElement(btnnLogOut).click().build().perform();
 
-
+        WebElement btnLogin = driver.findElement(By.xpath("//*[@class='ico-login']"));
+        Assert.assertTrue("Ana Sayfaya Dönüş Olmadı.",btnLogin.getText().contains("Log in"));
+        System.out.println("ANA SAYFAYA BAŞARILI BİR ŞEKİLDE DÖNÜŞ OLDU.");
 
     }
 }
