@@ -12,9 +12,21 @@ public class US_209 extends BaseDriver {
     @Test
     public void US_209(){
         driver.get("https://demowebshop.tricentis.com/");
-        WebElement logınbutton= driver.findElement(By.xpath("//a[@class='ico-login']"));
+        WebElement logın= driver.findElement(By.xpath("//a[@class='ico-login']"));
+        wait.until(ExpectedConditions.visibilityOf(logın));
+        logın.click();
+        WebElement email= driver.findElement(By.xpath("//input[@class='email']"));
+        wait.until(ExpectedConditions.visibilityOf(email));
+        email.sendKeys("team006test@gmail.com");
+        WebElement password= driver.findElement(By.xpath("//input[@class='password']"));
+        wait.until(ExpectedConditions.visibilityOf(password));
+        password.sendKeys("Password123");
+        WebElement logınbutton= driver.findElement(By.xpath("//input[@class='button-1 login-button']"));
         wait.until(ExpectedConditions.visibilityOf(logınbutton));
         logınbutton.click();
+        WebElement account= driver.findElement(By.xpath("(//a[@class='account'])[1]"));
+        wait.until(ExpectedConditions.visibilityOf(account));
+        account.click();
 
 
     }
