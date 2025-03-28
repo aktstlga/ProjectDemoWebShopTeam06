@@ -12,8 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class US_204 extends BaseDriver {
-    Actions actionDriver = new Actions(driver);
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
 
     @Test
     public void Login() {

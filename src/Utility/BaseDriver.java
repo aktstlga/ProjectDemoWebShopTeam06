@@ -18,7 +18,7 @@ public class BaseDriver {
     public static WebDriver driver;
 
     public  Actions actionDriver = new Actions(driver);
-    public  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(120));
+    public  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
     static {
 

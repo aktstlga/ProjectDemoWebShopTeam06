@@ -12,8 +12,6 @@ import java.time.Duration;
 
 public class US_202 extends BaseDriver {
 
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-
     @Test
     public void negativeRegisterUser() {
 
@@ -49,16 +47,5 @@ public class US_202 extends BaseDriver {
         Assert.assertEquals(expectedMessage, actualMessage);
 
         driver.quit();
-    }
-
-    public void waitForVisibilityAndClickThanClick(WebElement element) {
-        wait.until(ExpectedConditions.visibilityOf(element));
-        element.click();
-    }
-
-    public void fillingThePlaceholderWithWait(WebElement element, String text) {
-        wait.until(ExpectedConditions.visibilityOf(element));
-        element.clear();
-        element.sendKeys(text);
     }
 }

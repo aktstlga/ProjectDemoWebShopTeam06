@@ -14,7 +14,6 @@ import java.sql.Driver;
 import java.time.Duration;
 
 public class US_205 extends BaseDriver {
-    WebDriverWait waitDuration = new WebDriverWait(driver, Duration.ofSeconds(120));
 
     @Test()
     public void PleaseFillTheMissingField(){
@@ -23,7 +22,7 @@ public class US_205 extends BaseDriver {
         WebElement login = driver.findElement(By.className("ico-login"));
         waitForVisibilityAndClickThanClick(login);
 
-        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
+        wait.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
 
         WebElement email = driver.findElement(By.className("email"));
         fillingThePlaceholderWithWait(email, "");
@@ -34,7 +33,7 @@ public class US_205 extends BaseDriver {
         WebElement submitButton = driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
         waitForVisibilityAndClickThanClick(submitButton);
 
-        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com"));
+        wait.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com"));
         Assert.assertTrue("Aranan mesaj bulunamadı.", driver.getCurrentUrl().contains("https://demowebshop.tricentis.com"));
 
         Myfunc.wait(2);
@@ -47,7 +46,7 @@ public class US_205 extends BaseDriver {
         WebElement login = driver.findElement(By.className("ico-login"));
         waitForVisibilityAndClickThanClick(login);
 
-        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
+        wait.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
 
         WebElement email = driver.findElement(By.className("email"));
         fillingThePlaceholderWithWait(email, "team006test@gmail.com");
@@ -58,7 +57,7 @@ public class US_205 extends BaseDriver {
         WebElement submitButton = driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
         waitForVisibilityAndClickThanClick(submitButton);
 
-        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com"));
+        wait.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com"));
         Assert.assertTrue("Aranan mesaj bulunamadı.",driver.getCurrentUrl().contains("https://demowebshop.tricentis.com"));
 
         Myfunc.wait(2);
@@ -70,7 +69,7 @@ public class US_205 extends BaseDriver {
         WebElement login = driver.findElement(By.className("ico-login"));
         waitForVisibilityAndClickThanClick(login);
 
-        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
+        wait.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/login"));
 
         WebElement email = driver.findElement(By.className("email"));
         fillingThePlaceholderWithWait(email, "");
@@ -81,7 +80,7 @@ public class US_205 extends BaseDriver {
         WebElement submitButton = driver.findElement(By.cssSelector("input[value='Log in'][type='submit']"));
         waitForVisibilityAndClickThanClick(submitButton);
 
-        waitDuration.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com"));
+        wait.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com"));
         Assert.assertTrue("Aranan mesaj bulunamadı.",driver.getCurrentUrl().contains("https://demowebshop.tricentis.com"));
 
         Myfunc.wait(2);
