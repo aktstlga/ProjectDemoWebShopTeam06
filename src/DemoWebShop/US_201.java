@@ -22,6 +22,10 @@ public class US_201 extends BaseDriver {
         WebElement firstName=driver.findElement(By.id("FirstName"));
         fillingThePlaceholderWithWait(firstName,"Baris");
 
+        WebElement lastName=driver.findElement(By.id("LastName"));
+        fillingThePlaceholderWithWait(lastName,"Sancar");
+
+
 
     }
 
