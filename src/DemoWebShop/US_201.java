@@ -4,6 +4,8 @@ import Utility.BaseDriver;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class US_201 extends BaseDriver {
 
@@ -12,6 +14,9 @@ public class US_201 extends BaseDriver {
     driver.get("https://demowebshop.tricentis.com/");
         WebElement register = driver.findElement(By.className("ico-register"));
         waitForVisibilityAndClickThanClick(register);
+
+        wait.until(ExpectedConditions.urlMatches("https://demowebshop.tricentis.com/register"));
+
 
 
     }
