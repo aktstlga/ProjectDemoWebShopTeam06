@@ -19,12 +19,14 @@ public class US_201 extends BaseDriver {
         WebElement gender = driver.findElement(By.id("gender-male"));
         waitForVisibilityAndClickThanClick(gender);
 
-        WebElement firstName=driver.findElement(By.id("FirstName"));
-        fillingThePlaceholderWithWait(firstName,"Baris");
+        WebElement firstName = driver.findElement(By.id("FirstName"));
+        fillingThePlaceholderWithWait(firstName, "Baris");
 
-        WebElement lastName=driver.findElement(By.id("LastName"));
-        fillingThePlaceholderWithWait(lastName,"Sancar");
+        WebElement lastName = driver.findElement(By.id("LastName"));
+        fillingThePlaceholderWithWait(lastName, "Sancar");
 
+        WebElement emailPlaceholder = driver.findElement(By.id("Email"));
+        fillingThePlaceholderWithWait(emailPlaceholder, "bariss.sancarr@gmail.com");
 
 
     }
