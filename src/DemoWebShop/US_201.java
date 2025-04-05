@@ -28,6 +28,9 @@ public class US_201 extends BaseDriver {
         WebElement emailPlaceholder = driver.findElement(By.id("Email"));
         fillingThePlaceholderWithWait(emailPlaceholder, "bariss.sancarr@gmail.com");
 
+        WebElement passwordPlaceHolder = driver.findElement(By.id("Password"));
+        fillingThePlaceholderWithWait(passwordPlaceHolder, "123456");
+
 
     }
 
