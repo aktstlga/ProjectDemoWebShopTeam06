@@ -31,6 +31,10 @@ public class US_201 extends BaseDriver {
         WebElement passwordPlaceHolder = driver.findElement(By.id("Password"));
         fillingThePlaceholderWithWait(passwordPlaceHolder, "123456");
 
+        WebElement passwordAgainPlaceHolder = driver.findElement(By.id("ConfirmPassword"));
+        fillingThePlaceholderWithWait(passwordAgainPlaceHolder, "123456");
+
+
 
     }
 
