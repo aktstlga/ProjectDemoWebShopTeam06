@@ -41,10 +41,6 @@ public class US_201 extends BaseDriver {
         WebElement registerControl = driver.findElement(By.className("result"));
         Assert.assertTrue("Kayıt Yapılamadı", registerControl.getText().contains("Your registration completed"));
 
-
-
-
-
+        driver.quit();
     }
-
 }
