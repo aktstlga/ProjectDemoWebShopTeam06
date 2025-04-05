@@ -1,6 +1,7 @@
 package DemoWebShop;
 
 import Utility.BaseDriver;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -36,6 +37,10 @@ public class US_201 extends BaseDriver {
 
         WebElement registerButton = driver.findElement(By.name("register-button"));
         waitForVisibilityAndClickThanClick(registerButton);
+
+        WebElement registerControl = driver.findElement(By.className("result"));
+        Assert.assertTrue("Kayıt Yapılamadı", registerControl.getText().contains("Your registration completed"));
+
 
 
 
